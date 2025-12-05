@@ -1,41 +1,41 @@
-# Explication des class 
+# Explication des classes
 
 ## Tokeniser
 
-Objet qui sert a gerer tout ce qui concerne la tokenisation 
+Objet qui sert à gérer tout ce qui concerne la tokenisation.
 
-Dans le constructeur de la class l'objet s'assure que le packer punkt et punkt_tab sois bien telecharger sur la machine pour eviter tout probleme 
+Dans le constructeur de la classe, l'objet s’assure que les paquets **punkt** et **punkt_tab** soient bien téléchargés sur la machine pour éviter tout problème.
 
-### Methode 
+### Méthodes
 
-- tokenize : Découpe une phrase en mots.
-- stem : Réduit un mot à sa racine si le stemmer est actif.
-- clean_sentence : Combine tokenisation et stemming pour une phrase complète.
+- **tokenize** : Découpe une phrase en mots.
+- **stem** : Réduit un mot à sa racine si le stemmer est actif.
+- **clean_sentence** : Combine tokenisation et stemming pour une phrase complète.
 
-## DataGestion 
+## DataGestion
 
-Objet qui sert gerer le chargement des donnée, le prétraitement et la creation de vecteur d'entrainement
+Objet qui sert à gérer le chargement des données, le prétraitement et la création de vecteurs d’entraînement.
 
-### Methode 
+### Méthodes
 
-- load_and_process : Charge le JSON et prépare le vocabulaire (Stemming).
-- setDirClassePKLFile : Permet de definir l'emplacement des fichier classes.pkl sera enregistrer
-- setDirWorkPKLFile : Permet de definir l'emplacement des fichier words.pkl sera enregistrer
-- create_training_data : Génère les vecteurs X (Bag of Words) et Y (One-Hot labels).
+- **load_and_process** : Charge le JSON et prépare le vocabulaire (stemming).
+- **setDirClassePKLFile** : Permet de définir l’emplacement où le fichier **classes.pkl** sera enregistré.
+- **setDirWorkPKLFile** : Permet de définir l’emplacement où le fichier **words.pkl** sera enregistré.
+- **create_training_data** : Génère les vecteurs X (Bag of Words) et Y (One-Hot labels).
 
-## ModelTrainer 
+## ModelTrainer
 
-Objet qui gère la compilation et l'entraînement du réseau de neurones.
+Objet qui gère la compilation et l’entraînement du réseau de neurones.
 
-### Methode 
+### Méthodes
 
-- train : Entraine le model 
-- save : Sauvegarde le model entrainer dans un fichier .h5
+- **train** : Entraîne le modèle.
+- **save** : Sauvegarde le modèle entraîné dans un fichier .h5.
 
 ## ModelBuilder
 
-Objet qui s'occupe de cree le modele  
+Objet qui s’occupe de créer le modèle.
 
-### Methode 
+### Méthodes
 
-- build : Contruit le model avec l'architecture du modèle Keras.
+- **build** : Construit le modèle avec l’architecture du modèle Keras.
