@@ -13,7 +13,7 @@ class Tokeniser:
             try :
                 nltk.download('punkt', quiet=True)
             except Exception as e:
-                print(f"Imposible de telecharger le punkt {e}")
+                raise ValueError(f"Imposible de telecharger le punkt {e}")
 
         try:
             nltk.data.find('tokenizers/punkt_tab')
@@ -21,23 +21,35 @@ class Tokeniser:
             try :
                 nltk.download('punkt_tab', quiet=True)
             except Exception as e:
-                print(f"Imposible de telecharger le punkt_tab {e}")
+                raise ValueError(f"Imposible de telecharger le punkt_tab {e}")
 
         try :
             self.__french_stemmer = FrenchStemmer()
             self.__stateStemmer = True
         except Exception as e :
             self.__stateStemmer = False
-            print(f"Erreur du lancement du Stemmer : {e}")
+            raise ValueError(f"Erreur du lancement du Stemmer : {e}")
 
 
     def tokenize(self, sentence):
-        return nltk.word_tokenize(sentence, language='french')
+        try :
+            return nltk.word_tokenize(sentence, language='french')
+        except Exception as e:
+            raise ValueError(f"Erreur methode tokenize objet Tokeniser erreur {e}")
 
     def stem(self, word):
-        if self.__stateStemmer:
-            return self.__french_stemmer.stem(word.lower())
+        try :
+            if self.__stateStemmer:
+                return self.__french_stemmer.stem(word.lower())
+            else :
+                return word.lower()
+        except Exception as e:
+            raise ValueError(f"Erreur methode stem objet Tokeniser erreur {e}")
+
 
     def clean_sentence(self, sentence):
-        tokens = self.tokenize(sentence)
-        return [self.stem(w) for w in tokens]
+        try :
+            tokens = self.tokenize(sentence)
+            return [self.stem(w) for w in tokens]
+        except Exception as e:
+            raise ValueError(f"Erreur methode clean_sentence objet Tokeniser erreur {e}")
