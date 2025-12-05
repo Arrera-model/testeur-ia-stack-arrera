@@ -1,8 +1,12 @@
+import ssl
 import nltk
 from nltk.stem.snowball import FrenchStemmer
 
 class Tokeniser:
     def __init__(self):
+        if hasattr(ssl, '_create_unverified_context'):
+            ssl._create_default_https_context = ssl._create_unverified_context
+
         try:
             nltk.data.find('tokenizers/punkt')
         except LookupError:
