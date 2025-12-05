@@ -1,0 +1,74 @@
+{
+  "intents": [
+    {
+      "tag": "salutation",
+      "patterns": [
+        "Bonjour",
+        "Salut",
+        "Coucou",
+        "Comment ça va ?",
+        "Hello"
+      ],
+      "responses": [
+        "Bonjour ! En quoi puis-je vous aider ?",
+        "Salut ! Ravi de vous parler.",
+        "Hello ! Je suis là pour vous assister.",
+        "Bien, et vous ? Que souhaitez-vous faire aujourd'hui ?"
+      ]
+    },
+    {
+      "tag": "adieu",
+      "patterns": [
+        "Au revoir",
+        "Bye",
+        "À plus tard",
+        "Je m'en vais",
+        "Merci, au revoir"
+      ],
+      "responses": [
+        "Au revoir ! Revenez vite !",
+        "À bientôt ! Bonne journée.",
+        "Prenez soin de vous. À la prochaine."
+      ]
+    },
+    {
+      "tag": "merci",
+      "patterns": [
+        "Merci",
+        "Merci beaucoup",
+        "C'est gentil",
+        "Je vous remercie"
+      ],
+      "responses": [
+        "De rien !",
+        "Avec plaisir.",
+        "C'est tout à fait normal.",
+        "Pas de problème, n'hésitez pas si vous avez d'autres questions."
+      ]
+    },
+    {
+      "tag": "nom_bot",
+      "patterns": [
+        "Quel est ton nom ?",
+        "Comment tu t'appelles ?",
+        "Qui es-tu ?"
+      ],
+      "responses": [
+        "Je suis un chatbot d'assistance, créé avec TensorFlow.",
+        "Mon nom n'est pas important. Je suis ici pour vous aider."
+      ]
+    },
+    {
+      "tag": "humeur",
+      "patterns": [
+        "Tu vas bien ?",
+        "Comment te sens-tu ?",
+        "Ça roule ?"
+      ],
+      "responses": [
+        "En tant qu'IA, je n'ai pas de sentiments, mais mes systèmes fonctionnent parfaitement !",
+        "Je suis opérationnel et prêt à vous aider."
+      ]
+    }
+  ]
+}
