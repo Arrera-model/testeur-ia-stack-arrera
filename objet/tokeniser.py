@@ -32,15 +32,12 @@ class Tokeniser:
 
 
     def tokenize(self, sentence):
-        """Découpe une phrase en mots."""
         return nltk.word_tokenize(sentence, language='french')
 
     def stem(self, word):
-        """Réduit un mot à sa racine si le stemmer est actif."""
         if self.__stateStemmer:
             return self.__french_stemmer.stem(word.lower())
 
     def clean_sentence(self, sentence):
-        """Combine tokenisation et stemming pour une phrase complète."""
         tokens = self.tokenize(sentence)
         return [self.stem(w) for w in tokens]
