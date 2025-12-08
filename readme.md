@@ -1,59 +1,56 @@
 # Explication des classes
 
-## Tokeniser
+## DataLoader
 
-Objet qui sert à gérer tout ce qui concerne la tokenisation.
+Objet qui sera chargé des données d’entraînement pour le modèle
 
-Dans le constructeur de la classe, l'objet s’assure que les paquets **punkt** et **punkt_tab** soient bien téléchargés sur la machine pour éviter tout problème.
+### Paramètre d’entrée du constructeur
 
-### Méthodes
-
-- **tokenize** : Découpe une phrase en mots.
-- **stem** : Réduit un mot à sa racine si le stemmer est actif.
-- **clean_sentence** : Combine tokenisation et stemming pour une phrase complète.
-
-## DataGestion
-
-Objet qui sert à gérer le chargement des données, le prétraitement et la création de vecteurs d’entraînement.
+Prend en paramètre json_file qui correspond à l’emplacement du fichier JSON de données
 
 ### Méthodes
 
-- **load_and_process** : Charge le JSON et prépare le vocabulaire (stemming).
-- **setDirClassePKLFile** : Permet de définir l’emplacement où le fichier **classes.pkl** sera enregistré.
-- **setDirWorkPKLFile** : Permet de définir l’emplacement où le fichier **words.pkl** sera enregistré.
-- **create_training_data** : Génère les vecteurs X (Bag of Words) et Y (One-Hot labels).
+**load_data** : Charge le fichier JSON et retourne les listes nécessaires pour l’entraînement. (sentences : list, labels : numpy.array, classes : list)
+**save_classe_file** : Sauvegarde les noms des classes dans un fichier JSON (obligatoirement)
+**encoding_label** : Ce changement de l’encodage des labels (String → Int)
+
 
 ## ModelTrainer
 
 Objet qui gère la compilation et l’entraînement du réseau de neurones.
 
+### Paramètre d’entrée du constructeur
+
+L’objet ModelTrainer ne prend aucun paramètre au constructeur.
+
 ### Méthodes
 
+- **create_vectorizer** : Crée le vectorizer qui est obligatoire pour la création du modèle.
+- **get_vectorizer** : Retourne le vectorizer créé (peut être utile).
+- **createModel** : Crée un modèle avec la classe ModelBuilder. Ne prend en paramètre que num_classes.
+- **loadModel** : Prend un modèle déjà chargé en paramètre.
 - **train** : Entraîne le modèle.
-- **save** : Sauvegarde le modèle entraîné dans un fichier .h5.
+- **save** : Sauvegarde le modèle entraîné dans un fichier .keras.
 
-## ModelBuilder
+### Utilisation 
 
-Objet qui s’occupe de créer le modèle.
-
-### Méthodes
-
-- **build** : Construit le modèle avec l’architecture du modèle Keras.
+Si vous voulez créer un modèle pour l’entraîner, utilisez la méthode **createModel**, sinon utilisez la méthode **loadModel**.
 
 ## ArreraIALoad
 
-Charge et exécute directement des modèles d'IA à partir de leurs fichiers.
+Charge et exécute directement des modèles d’IA à partir de leurs fichiers.  
 Cette classe agit comme un conteneur pour un modèle chargé en mémoire.
 
 ### Methode 
 
 #### Private 
 
-**__loadArreraModel2026** : Charge les modeles d'IA crée par Arrera 
-**__sendRequetteArreraTextModel** : Gere l'envoie de requette au modele de texte d'Arrera
+- **__predict_arrera_2026_model** : Gère l’envoi de requêtes au modèle de texte d’Arrera. Prend en paramètre *sentence*, qui correspond à la phrase de l’utilisateur, et *confidence_threshold*, qui correspond au seuil de confiance.
 
 ### Public
 
-**send_request** : Permet d'envoyer des requette au model charger
+- **send_request** : Permet d’envoyer des requêtes au modèle chargé. Prend les mêmes paramètres que les méthodes privées *predict* correspondant à chaque modèle.
+
+- **loadArreraModel2026** : Charge les modèles d’IA développés par Arrera en 2026. 
 
 
