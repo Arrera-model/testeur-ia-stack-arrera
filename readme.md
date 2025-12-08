@@ -2,43 +2,43 @@
 
 ## DataLoader
 
-Objet qui sera charger les donnée d'entrainement pour le model 
+Objet qui sera chargé des données d’entraînement pour le modèle
 
-### Parametre d'entrer du constructeur
+### Paramètre d’entrée du constructeur
 
-Prend en parametre json_file qui correspont a l'emplacement du fichier json de donné
+Prend en paramètre json_file qui correspond à l’emplacement du fichier JSON de données
 
 ### Méthodes
 
-**load_data** : Charge le fichier JSON et retourne les listes nécessaires pour l'entraînement. (sentences : numpy.array , labels : numpy.array , classes : list)*
-**save_classe_file** : Sauvegarde les noms des classes dans un fichier JSON (Obligatoirement)
-**encoding_label** : Ce change de l'encodage des label (String --> Int)
+**load_data** : Charge le fichier JSON et retourne les listes nécessaires pour l’entraînement. (sentences : list, labels : numpy.array, classes : list)
+**save_classe_file** : Sauvegarde les noms des classes dans un fichier JSON (obligatoirement)
+**encoding_label** : Ce changement de l’encodage des labels (String → Int)
 
 
 ## ModelTrainer
 
 Objet qui gère la compilation et l’entraînement du réseau de neurones.
 
-### Parametre d'entrer du constructeur
+### Paramètre d’entrée du constructeur
 
-La class ModelTrainer prend  aucun parametre au constructeur
+L’objet ModelTrainer ne prend aucun paramètre au constructeur.
 
 ### Méthodes
 
-- **create_vectorizer** : Crée le vectorizer qui est obligatoir pour la creation de model
-- **get_vectorizer** : Retourne le vectorizer crée (peut etre utile)
-- **createModel** : Cree un model avec la class ModelBuilder. Prend en parametre que num_classes en parametre.
-- **loadModel** : Prend un model deja charger en parametre.
+- **create_vectorizer** : Crée le vectorizer qui est obligatoire pour la création du modèle.
+- **get_vectorizer** : Retourne le vectorizer créé (peut être utile).
+- **createModel** : Crée un modèle avec la classe ModelBuilder. Ne prend en paramètre que num_classes.
+- **loadModel** : Prend un modèle déjà chargé en paramètre.
 - **train** : Entraîne le modèle.
 - **save** : Sauvegarde le modèle entraîné dans un fichier .keras.
 
 ### Utilisation 
 
-Si vous voulez cree un model pour l'entrainer utiliser la methode **createModel** sinon utiliser la methode **loadModel**.
+Si vous voulez créer un modèle pour l’entraîner, utilisez la méthode **createModel**, sinon utilisez la méthode **loadModel**.
 
 ## ArreraIALoad
 
-Charge et exécute directement des modèles d'IA à partir de leurs fichiers.
+Charge et exécute directement des modèles d’IA à partir de leurs fichiers.  
 Cette classe agit comme un conteneur pour un modèle chargé en mémoire.
 
 ### Methode 
