@@ -1,16 +1,5 @@
 # Explication des classes
 
-## DataGestion
-
-Objet qui sert à gérer le chargement des données, le prétraitement et la création de vecteurs d’entraînement.
-
-### Méthodes
-
-- **load_and_process** : Charge le JSON et prépare le vocabulaire (stemming).
-- **setDirClassePKLFile** : Permet de définir l’emplacement où le fichier **classes.pkl** sera enregistré.
-- **setDirWorkPKLFile** : Permet de définir l’emplacement où le fichier **words.pkl** sera enregistré.
-- **create_training_data** : Génère les vecteurs X (Bag of Words) et Y (One-Hot labels).
-
 ## ModelTrainer
 
 Objet qui gère la compilation et l’entraînement du réseau de neurones.
