@@ -6,12 +6,18 @@ Objet qui gère la compilation et l’entraînement du réseau de neurones.
 
 ### Parametre d'entrer du constructeur
 
-La class ModelTrainer utilise demande les meme parametre que ModelBuilder
+La class ModelTrainer prend  aucun parametre au constructeur
 
 ### Méthodes
 
+- **createModel** : Cree un model avec la class ModelBuilder. Prend en parametre les memes parametre que le constructeur ModelBuilder.
+- **loadModel** : Prend un model deja charger en parametre.
 - **train** : Entraîne le modèle.
 - **save** : Sauvegarde le modèle entraîné dans un fichier .keras.
+
+### Utilisation 
+
+Si vous voulez cree un model pour l'entrainer utiliser la methode **createModel** sinon utiliser la methode **loadModel**.
 
 ## ArreraIALoad
 
