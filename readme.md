@@ -1,17 +1,5 @@
 # Explication des classes
 
-## Tokeniser
-
-Objet qui sert à gérer tout ce qui concerne la tokenisation.
-
-Dans le constructeur de la classe, l'objet s’assure que les paquets **punkt** et **punkt_tab** soient bien téléchargés sur la machine pour éviter tout problème.
-
-### Méthodes
-
-- **tokenize** : Découpe une phrase en mots.
-- **stem** : Réduit un mot à sa racine si le stemmer est actif.
-- **clean_sentence** : Combine tokenisation et stemming pour une phrase complète.
-
 ## DataGestion
 
 Objet qui sert à gérer le chargement des données, le prétraitement et la création de vecteurs d’entraînement.
