@@ -30,7 +30,7 @@ class DataLoader:
 
 
             for pattern in intent['patterns']:
-                sentences.append(pattern) # On garde le texte brut !
+                sentences.append(pattern)
                 self.__labels.append(tag)
 
         self.__classes = sorted(self.__classes)
