@@ -6,10 +6,26 @@ class ModelTrainer:
     def __init__(self):
         self.__model = None
         self.__modelLoaded = False
+        self.__vectorizer = None
 
-    def createModel(self,**kwargs):
-        self.__model = ModelBuilder(vectorizer=kwargs.get('vectorizer'),
-                                   num_classes=kwargs.get('num_classes')).build()
+    def create_vectorizer(self,sentences,max_token:int=2000,out_sequence_length:int=20):
+        try :
+            self.__vectorizer = tf.keras.layers.TextVectorization(
+                max_tokens=max_token,
+                output_mode='int',
+                output_sequence_length=out_sequence_length
+            )
+            self.__vectorizer.adapt(sentences)
+            return True
+        except :
+            return False
+
+    def get_vectorizer(self):
+        return self.__vectorizer
+
+    def createModel(self,num_classes):
+        self.__model = ModelBuilder(vectorizer=self.__vectorizer,
+                                   num_classes=num_classes).build()
         self.__modelLoaded = True
 
     def loadModel(self,model):

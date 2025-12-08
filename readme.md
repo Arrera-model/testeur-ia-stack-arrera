@@ -25,7 +25,9 @@ La class ModelTrainer prend  aucun parametre au constructeur
 
 ### Méthodes
 
-- **createModel** : Cree un model avec la class ModelBuilder. Prend en parametre les memes parametre que le constructeur ModelBuilder.
+- **create_vectorizer** : Crée le vectorizer qui est obligatoir pour la creation de model
+- **get_vectorizer** : Retourne le vectorizer crée (peut etre utile)
+- **createModel** : Cree un model avec la class ModelBuilder. Prend en parametre que num_classes en parametre.
 - **loadModel** : Prend un model deja charger en parametre.
 - **train** : Entraîne le modèle.
 - **save** : Sauvegarde le modèle entraîné dans un fichier .keras.
