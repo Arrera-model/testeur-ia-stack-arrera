@@ -26,7 +26,7 @@ class ArreraIALoad:
         if len(input_tensor.shape) == 1:
             input_tensor = tf.expand_dims(input_tensor, axis=-1)
 
-        predictions = self.__model.send_request(input_tensor, verbose=0)
+        predictions = self.__model.predict(input_tensor, verbose=0)
 
         prediction = predictions[0]
 
