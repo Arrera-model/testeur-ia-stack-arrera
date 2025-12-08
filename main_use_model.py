@@ -29,3 +29,17 @@ def use_model_arrera(MODEL_PATH:str,CLASSES_PATH:str):
             # if tag == "salutation": print("Bonjour !")
         else:
             print(Fore.RED + f"Bot: Je n'ai pas compris... ({confidence:.2%})")
+
+def use_model_gemma(dir:str):
+    bot = ArreraIALoad()
+
+    bot.loadGemma(dir)
+
+    while True:
+        user_input = input(Fore.CYAN + "Vous: " + Style.RESET_ALL)
+
+        if user_input.lower() in ["quit", "exit", "q"]:
+            break
+
+        reponse = bot.send_request(user_input)
+        print(Fore.MAGENTA + f"Bot: {reponse}")

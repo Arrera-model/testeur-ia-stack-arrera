@@ -1,5 +1,5 @@
 import colorama
-from main_use_model import use_model_arrera
+from main_use_model import use_model_arrera,use_model_gemma
 from main_model_trainer import model_trainer_bluider,model_trainer
 
 
@@ -13,6 +13,7 @@ def main():
         var = input("1. Entrainer et crée un model\n"
                     "2. Entrainer un model deja crée\n"
                     "3.Utiliser un model Arrera\n"
+                    "4. Charger un model gemma\n"
                     "0.Quitter\n#")
         try :
             var = int(var)
@@ -37,6 +38,9 @@ def main():
                 model_path = input("Emplacement du model : ")
                 classe_file_path = input("Emplacement du fichier JSON : ")
                 use_model_arrera(model_path,classe_file_path)
+            case 4:
+                model_path = input("Emplacement du model Gemma : ")
+                use_model_gemma(model_path)
             case 0:
                 var = 0
                 print("Au revoir")

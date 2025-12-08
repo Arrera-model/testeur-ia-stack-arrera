@@ -2,9 +2,11 @@ import tensorflow as tf
 import json
 import numpy as np
 import os
+from llama_cpp import Llama
 
 LISTMODELSUPPROT = [
-    "arrera_model_2026"
+    "arrera_model_2026",
+    "google-gemma"
 ]
 
 class ArreraIALoad:
@@ -40,6 +42,22 @@ class ArreraIALoad:
 
         return predicted_tag, float(confidence)
 
+    def predict_gemma_model(self, prompt, max_tokens=512):
+        """
+        Génère une réponse. Utilise le format 'chat' compatible OpenAI.
+        """
+        messages = [
+            {"role": "user", "content": prompt}
+        ]
+
+        output = self.__model.create_chat_completion(
+            messages=messages,
+            max_tokens=max_tokens,
+            temperature=0.7,
+        )
+
+        return output['choices'][0]['message']['content']
+
     # Methode public
 
     def loadArreraModel2026(self, model_path:str, classes_path:str):
@@ -60,9 +78,25 @@ class ArreraIALoad:
         except Exception as e:
             raise ValueError(f"Erreur lors du chargement du chatbot : {e}")
 
+    def loadGemma(self,model_path:str,n_ctx:int=2048):
+        try:
+            self.__model = Llama(
+                model_path=model_path,
+                n_ctx=n_ctx,
+                n_gpu_layers=0,
+                verbose=False
+            )
+
+            self.__is_loaded = True
+            self.__model_type = LISTMODELSUPPROT[1]
+            return True
+        except Exception as e:
+            raise ValueError(f"Erreur lors du chargement : {e}")
 
     def send_request(self, sentence: str, confidence_threshold: float = 0.70):
         if self.__model_type == LISTMODELSUPPROT[0]:
             return self.predict_arrera_2026_model(sentence, confidence_threshold)
+        elif self.__model_type == LISTMODELSUPPROT[1]:
+            return self.predict_gemma_model(sentence)
         else:
             return None, 0.0
