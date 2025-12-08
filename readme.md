@@ -4,18 +4,14 @@
 
 Objet qui gère la compilation et l’entraînement du réseau de neurones.
 
+### Parametre d'entrer du constructeur
+
+La class ModelTrainer utilise demande les meme parametre que ModelBuilder
+
 ### Méthodes
 
 - **train** : Entraîne le modèle.
-- **save** : Sauvegarde le modèle entraîné dans un fichier .h5.
-
-## ModelBuilder
-
-Objet qui s’occupe de créer le modèle.
-
-### Méthodes
-
-- **build** : Construit le modèle avec l’architecture du modèle Keras.
+- **save** : Sauvegarde le modèle entraîné dans un fichier .keras.
 
 ## ArreraIALoad
 
