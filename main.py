@@ -1,41 +1,47 @@
-from objet.ArreraIALoad import ArreraIALoad
 import colorama
-from colorama import Fore, Style
+from main_use_model import use_model_arrera
+from main_model_trainer import model_trainer_bluider,model_trainer
+
 
 # Initialisation des couleurs pour le terminal
 colorama.init(autoreset=True)
 
 def main():
-    # Chemins vers vos fichiers générés par l'entraînement
-    MODEL_PATH = "model_test/test_model.keras"
-    CLASSES_PATH = "model_test/classes.json"
+    print("## Programme de teste pour la stack de gestion model d'Arrera ##")
+    var = 1
+    while var !=0:
+        var = input("1. Entrainer et crée un model\n"
+                    "2. Entrainer un model deja crée\n"
+                    "3.Utiliser un model Arrera\n"
+                    "0.Quitter\n#")
+        try :
+            var = int(var)
+        except :
+            print("Valeur invalide")
+            continue
 
-    print(Fore.YELLOW + "Chargement du cerveau en cours...")
-
-    bot = ArreraIALoad()
-
-    if not bot.loadArreraModel2026(MODEL_PATH, CLASSES_PATH):
-        print(Fore.RED + "Impossible de lancer le chatbot.")
-        return
-
-    print(Fore.GREEN + "\n--- Chatbot Prêt ! (Tapez 'quit' pour quitter) ---")
-    print(Style.DIM + f"Seuil de confiance : 70%")
-
-    while True:
-        user_input = input(Fore.CYAN + "Vous: " + Style.RESET_ALL)
-
-        if user_input.lower() in ["quit", "exit", "q"]:
-            break
-
-        # Prédiction
-        tag, confidence = bot.send_request(user_input, confidence_threshold=0.70)
-
-        if tag:
-            print(Fore.MAGENTA + f"Bot: [Intention: {tag}] ({confidence:.2%})")
-            # Ici, plus tard, vous ajouterez la logique de réponse :
-            # if tag == "salutation": print("Bonjour !")
-        else:
-            print(Fore.RED + f"Bot: Je n'ai pas compris... ({confidence:.2%})")
+        match var :
+            case 1:
+                dataset_path = input("Emplacement du dataset : ")
+                classe_file_path = input("Emplacement du fichier JSON : ")
+                model_file_path = input("Emplacement du model : ")
+                model_trainer_bluider(dataset_path,classe_file_path,model_file_path)
+                print("Model crée")
+            case 2:
+                dataset_path = input("Emplacement du dataset : ")
+                classe_file_path = input("Emplacement du fichier JSON : ")
+                model_file_path = input("Emplacement du model : ")
+                model_trainer(dataset_path,classe_file_path,model_file_path)
+                print("Model entrainer")
+            case 3:
+                model_path = input("Emplacement du model : ")
+                classe_file_path = input("Emplacement du fichier JSON : ")
+                use_model_arrera(model_path,classe_file_path)
+            case 0:
+                var = 0
+                print("Au revoir")
+            case _:
+                print("Erreur")
 
 if __name__ == "__main__":
     main()

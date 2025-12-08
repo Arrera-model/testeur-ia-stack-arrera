@@ -1,8 +1,8 @@
 from objet.ModelTrainer import ModelTrainer
 from objet.DataLoader import DataLoader
 
-def main():
-    loader = DataLoader("model_test/intents.json")
+def model_trainer_bluider(dataset_file:str,classe_file_path:str,model_file_path:str):
+    loader = DataLoader(dataset_file)
     print("Loader charger")
 
     sentences, labels_raw, classes = loader.load_data()
@@ -10,7 +10,7 @@ def main():
     train_y = loader.encoding_label()
     print(f"Données chargées : {len(sentences)} phrases détectées.")
 
-    if not loader.save_classe_file("model_test/classes.json"):
+    if not loader.save_classe_file(classe_file_path):
         return
     print("Fichier classe.json sauvegardé.")
 
@@ -26,8 +26,27 @@ def main():
     trainer.train(sentences,train_y)
     print("Entrainement reussi")
 
-    trainer.save("model_test/test_model.keras")
+    trainer.save(model_file_path)
     print("Enregistrement du model")
 
-if __name__ == "__main__":
-    main()
+def model_trainer(dataset_file:str,classe_file_path:str,model_file_path:str):
+    loader = DataLoader(dataset_file)
+    print("Loader charger")
+
+    sentences, labels_raw, classes = loader.load_data()
+
+    train_y = loader.encoding_label()
+    print(f"Données chargées : {len(sentences)} phrases détectées.")
+
+    if not loader.save_classe_file(classe_file_path):
+        return
+    print("Fichier classe.json sauvegardé.")
+
+    trainer = ModelTrainer()
+    print("Initilisation de l'entrainer de model")
+
+    trainer.loadModel(model_file_path)
+    print("Model charger")
+
+    trainer.train(sentences,train_y)
+    print("Entrainement reussi")
