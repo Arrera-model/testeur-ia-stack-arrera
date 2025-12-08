@@ -1,9 +1,7 @@
+import tensorflow as tf
 import json
-import pickle
 import numpy as np
-import random
-from tensorflow.keras.models import load_model
-from objet.tokeniser import Tokeniser
+import os
 
 LISTMODELSUPPROT = [
     "arrera_model_2026"
@@ -14,85 +12,57 @@ class ArreraIALoad:
         self.__model_type = None
         self.__model = None
         self.__tokeniser = None
+        self.__classes = None
+        self.__is_loaded = False
 
     # Methode private
 
-    def __loadArreraModel2026(self, model_path, words_path, classes_path, intents_path):
-        if not all([words_path, classes_path, intents_path]):
-            raise FileNotFoundError("Pour 'arrera_model_2026', les chemins 'words_path', 'classes_path', et 'intents_path' sont requis.")
+    def predict_arrera_2026_model(self,sentence: str, confidence_threshold: float = 0.70):
+        if not self.__is_loaded:
+            return None, 0.0
 
-        self.__model = load_model(model_path)
-        self.__words = pickle.load(open(words_path, 'rb'))
-        self.__classes = pickle.load(open(classes_path, 'rb'))
-        self.__intents = json.loads(open(intents_path, encoding='utf-8').read())
-        self.__tokeniser = Tokeniser()
+        input_tensor = tf.constant([sentence], dtype=tf.string)
 
+        if len(input_tensor.shape) == 1:
+            input_tensor = tf.expand_dims(input_tensor, axis=-1)
 
-    def __sendRequetteArreraTextModel(self, sentence: str) -> str:
-        # 1. Créer le sac de mots à partir de la phrase
-        sentence_words = self.__tokeniser.clean_sentence(sentence)
-        bag = [0] * len(self.__words)
-        for s_word in sentence_words:
-            for i, word in enumerate(self.__words):
-                if word == s_word:
-                    bag[i] = 1
+        predictions = self.__model.send_request(input_tensor, verbose=0)
 
-        # 2. Prédire l'intention avec le modèle Keras
-        res = self.__model.predict(np.array([bag]), verbose=0)[0]
+        prediction = predictions[0]
 
-        # 3. Filtrer les prédictions sous un seuil et trier
-        ERROR_THRESHOLD = 0.25
-        results = [[i, r] for i, r in enumerate(res) if r > ERROR_THRESHOLD]
-        results.sort(key=lambda x: x[1], reverse=True)
+        max_index = np.argmax(prediction)
+        confidence = prediction[max_index]
 
-        # 4. Formater la liste des intentions
-        return_list = []
-        for r in results:
-            return_list.append({"intent": self.__classes[r[0]], "probability": str(r[1])})
+        predicted_tag = self.__classes[max_index]
 
-        # 5. Obtenir une réponse textuelle
-        if not return_list:
-            return "Je ne suis pas sûr de comprendre. Pouvez-vous reformuler ?"
+        if confidence < confidence_threshold:
+            return None, float(confidence)
 
-        tag = return_list[0]['intent']
-        for intent_data in self.__intents['intents']:
-            if intent_data['tag'] == tag:
-                return random.choice(intent_data['responses'])
-
-        return "Erreur interne : Intention trouvée mais pas de réponse associée."
+        return predicted_tag, float(confidence)
 
     # Methode public
 
-    def loadModel(self,type_model:str="arrera_model_2026",model_directory:str="model",nameModel:str="model.keras"):
-        if type_model in LISTMODELSUPPROT:
-            if type_model == LISTMODELSUPPROT[0]:
-                self.__model_type = LISTMODELSUPPROT[0]
+    def loadArreraModel2026(self, model_path:str, classes_path:str):
+        if not os.path.exists(model_path) or not os.path.exists(classes_path):
+            raise ValueError("Erreur : Fichiers modèles introuvables.")
 
-                wordFile = model_directory+"/words.pkl"
-                classFile = model_directory+"/classes.pkl"
-                intentFile = model_directory+"/intents.json"
-                modelFile = model_directory+"/"+nameModel
+        try:
+            # 1. Chargement du modèle Keras complet (avec la couche TextVectorization incluse)
+            self.__model = tf.keras.models.load_model(model_path)
 
-                try :
-                    self.__loadArreraModel2026(model_path=modelFile,
-                                               words_path=wordFile,
-                                               classes_path=classFile,
-                                               intents_path=intentFile)
-                    return True
-                except Exception as e:
-                        raise ValueError(f"Erreur lors du chargement du modèle : {e}")
-            else :
-                return False
+            # 2. Chargement des noms de classes (labels)
+            with open(classes_path, 'r', encoding='utf-8') as f:
+                self.__classes = json.load(f)
 
-        else :
-            return False
+            self.__is_loaded = True
+            self.__model_type = LISTMODELSUPPROT[0]
+            return True
+        except Exception as e:
+            raise ValueError(f"Erreur lors du chargement du chatbot : {e}")
 
-    def send_request(self, prompt: str) -> str:
-        if not self.__model:
-            return "Erreur : Aucun modèle n'est chargé. L'initialisation a probablement échoué."
 
+    def send_request(self, sentence: str, confidence_threshold: float = 0.70):
         if self.__model_type == LISTMODELSUPPROT[0]:
-            return self.__sendRequetteArreraTextModel(prompt)
-
+            return self.predict_arrera_2026_model(sentence, confidence_threshold)
         else:
-            return f"Erreur : Pas de méthode de prédiction définie pour le type '{self.__model_type}'."
+            return None, 0.0

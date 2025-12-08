@@ -45,11 +45,12 @@ Cette classe agit comme un conteneur pour un modèle chargé en mémoire.
 
 #### Private 
 
-**__loadArreraModel2026** : Charge les modeles d'IA crée par Arrera 
-**__sendRequetteArreraTextModel** : Gere l'envoie de requette au modele de texte d'Arrera
+- **__predict_arrera_2026_model** : Gère l’envoi de requêtes au modèle de texte d’Arrera. Prend en paramètre *sentence*, qui correspond à la phrase de l’utilisateur, et *confidence_threshold*, qui correspond au seuil de confiance.
 
 ### Public
 
-**send_request** : Permet d'envoyer des requette au model charger
+- **send_request** : Permet d’envoyer des requêtes au modèle chargé. Prend les mêmes paramètres que les méthodes privées *predict* correspondant à chaque modèle.
+
+- **loadArreraModel2026** : Charge les modèles d’IA développés par Arrera en 2026. 
 
 
