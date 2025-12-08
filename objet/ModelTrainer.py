@@ -36,9 +36,14 @@ class ModelTrainer:
         if self.__modelLoaded:
             lr_schedule = ReduceLROnPlateau(monitor='loss', factor=0.5, patience=5, min_lr=0.0001)
 
+            x_tensor = tf.constant(train_x, dtype=tf.string)
+
+            if len(x_tensor.shape) == 1:
+                x_tensor = tf.expand_dims(x_tensor, axis=-1)
+
             # Entraînement
             history = self.__model.fit(
-                train_x,
+                x_tensor,
                 train_y,
                 epochs=epochs,
                 batch_size=batch_size,

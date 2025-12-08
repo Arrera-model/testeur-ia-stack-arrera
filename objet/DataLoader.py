@@ -35,7 +35,7 @@ class DataLoader:
 
         self.__classes = sorted(self.__classes)
 
-        return np.array(sentences), np.array(self.__labels), self.__classes
+        return sentences, np.array(self.__labels), self.__classes
 
     def save_classe_file(self,class_file:str="classes.json"):
         try :
