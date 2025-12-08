@@ -3,6 +3,7 @@ import json
 import numpy as np
 import os
 from llama_cpp import Llama
+import torch
 
 LISTMODELSUPPROT = [
     "arrera_model_2026",
@@ -80,10 +81,13 @@ class ArreraIALoad:
 
     def loadGemma(self,model_path:str,n_ctx:int=2048):
         try:
+
+            n_gpu_layers = -1 if torch.cuda.is_available() else 0
+
             self.__model = Llama(
                 model_path=model_path,
                 n_ctx=n_ctx,
-                n_gpu_layers=0,
+                n_gpu_layers=n_gpu_layers,
                 verbose=False
             )
 
