@@ -12,6 +12,7 @@ Prend en parametre json_file qui correspont a l'emplacement du fichier json de d
 
 **load_data** : Charge le fichier JSON et retourne les listes nécessaires pour l'entraînement. (sentences : numpy.array , labels : numpy.array , classes : list)*
 **save_classe_file** : Sauvegarde les noms des classes dans un fichier JSON (Obligatoirement)
+**encoding_label** : Ce change de l'encodage des label (String --> Int)
 
 
 ## ModelTrainer

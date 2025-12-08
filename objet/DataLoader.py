@@ -6,6 +6,7 @@ class DataLoader:
     def __init__(self, json_file:str):
         self.file_path = json_file
         self.__classes = None
+        self.__labels = None
 
     def load_data(self):
         if not os.path.exists(self.file_path):
@@ -18,7 +19,7 @@ class DataLoader:
             raise ValueError(f"Erreur : Le fichier '{self.file_path}' n'est pas un JSON valide.")
 
         sentences = []
-        labels = []
+        self.__labels = []
         self.__classes = []
 
         for intent in data['intents']:
@@ -30,11 +31,11 @@ class DataLoader:
 
             for pattern in intent['patterns']:
                 sentences.append(pattern) # On garde le texte brut !
-                labels.append(tag)
+                self.__labels.append(tag)
 
         self.__classes = sorted(self.__classes)
 
-        return np.array(sentences), np.array(labels), self.__classes
+        return np.array(sentences), np.array(self.__labels), self.__classes
 
     def save_classe_file(self,class_file:str="classes.json"):
         try :
@@ -43,3 +44,9 @@ class DataLoader:
             return True
         except :
             return False
+
+    def encoding_label(self):
+        label_array = np.array(self.__labels)
+        label_to_index = {label: i for i, label in enumerate(self.__classes)}
+        train_y = np.array([label_to_index[l] for l in label_array])
+        return train_y
