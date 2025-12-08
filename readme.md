@@ -1,5 +1,19 @@
 # Explication des classes
 
+## DataLoader
+
+Objet qui sera charger les donnée d'entrainement pour le model 
+
+### Parametre d'entrer du constructeur
+
+Prend en parametre json_file qui correspont a l'emplacement du fichier json de donné
+
+### Méthodes
+
+**load_data** : Charge le fichier JSON et retourne les listes nécessaires pour l'entraînement. (sentences : numpy.array , labels : numpy.array , classes : list)*
+**save_classe_file** : Sauvegarde les noms des classes dans un fichier JSON (Obligatoirement)
+
+
 ## ModelTrainer
 
 Objet qui gère la compilation et l’entraînement du réseau de neurones.
