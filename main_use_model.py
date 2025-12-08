@@ -1,11 +1,5 @@
 from objet.ArreraIALoad import ArreraIALoad
-import colorama
 from colorama import Fore, Style
-
-# Initialisation des couleurs pour le terminal
-
-#"model_test/test_model.keras"
-#"model_test/classes.json"
 
 def use_model_arrera(MODEL_PATH:str,CLASSES_PATH:str):
 
