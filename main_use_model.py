@@ -33,7 +33,7 @@ def use_model_arrera(MODEL_PATH:str,CLASSES_PATH:str):
 def use_model_gemma(dir:str):
     bot = ArreraIALoad()
 
-    bot.loadGemma(dir)
+    bot.load_model_gguf(dir)
 
     while True:
         user_input = input(Fore.CYAN + "Vous: " + Style.RESET_ALL)

@@ -13,7 +13,7 @@ def main():
         var = input("1. Entrainer et crée un model\n"
                     "2. Entrainer un model deja crée\n"
                     "3.Utiliser un model Arrera\n"
-                    "4. Charger un model gemma\n"
+                    "4. Charger un model local en .gguf\n"
                     "0.Quitter\n#")
         try :
             var = int(var)
@@ -39,7 +39,7 @@ def main():
                 classe_file_path = input("Emplacement du fichier JSON : ")
                 use_model_arrera(model_path,classe_file_path)
             case 4:
-                model_path = input("Emplacement du model Gemma : ")
+                model_path = input("Emplacement du model local en .gguf : ")
                 use_model_gemma(model_path)
             case 0:
                 var = 0

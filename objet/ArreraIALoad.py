@@ -7,7 +7,7 @@ import torch
 
 LISTMODELSUPPROT = [
     "arrera_model_2026",
-    "google-gemma"
+    "model_gguf"
 ]
 
 class ArreraIALoad:
@@ -43,7 +43,7 @@ class ArreraIALoad:
 
         return predicted_tag, float(confidence)
 
-    def predict_gemma_model(self, prompt, max_tokens=512):
+    def predict_gguf_model(self, prompt, max_tokens=512):
         """
         Génère une réponse. Utilise le format 'chat' compatible OpenAI.
         """
@@ -79,7 +79,7 @@ class ArreraIALoad:
         except Exception as e:
             raise ValueError(f"Erreur lors du chargement du chatbot : {e}")
 
-    def loadGemma(self,model_path:str,n_ctx:int=2048):
+    def load_model_gguf(self, model_path:str, n_ctx:int=2048):
         try:
 
             n_gpu_layers = -1 if torch.cuda.is_available() else 0
@@ -101,6 +101,6 @@ class ArreraIALoad:
         if self.__model_type == LISTMODELSUPPROT[0]:
             return self.predict_arrera_2026_model(sentence, confidence_threshold)
         elif self.__model_type == LISTMODELSUPPROT[1]:
-            return self.predict_gemma_model(sentence)
+            return self.predict_gguf_model(sentence)
         else:
             return None, 0.0
