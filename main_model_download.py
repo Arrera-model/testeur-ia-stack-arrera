@@ -7,6 +7,7 @@ def use_model_download():
               "2. Voir le detail d'un modele\n"
               "3. Voir les model telecharger\n"
               "4. Telecharger un model\n"
+              "5. Voir le chemin d'un model\n"
               "# ")
 
     try :
@@ -49,6 +50,14 @@ def use_model_download():
                 print("Modele telecharger")
             else :
                 print("Erreur")
+        case 5 :
+            print("Liste des modeles Telecharger : ")
+            for v in downloader.get_model_download():
+                print(f"- {v}")
+
+            print("___________________")
+            v = input("Modele : ")
+            print(downloader.get_path_model(v))
 
         case _ :
             print("Valeur invalide")
