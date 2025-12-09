@@ -4,3 +4,4 @@ tensorflow
 colorama
 llama-cpp-python
 torch
+requests
