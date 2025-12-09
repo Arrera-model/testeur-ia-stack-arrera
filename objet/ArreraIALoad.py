@@ -20,7 +20,7 @@ class ArreraIALoad:
 
     # Methode private
 
-    def predict_arrera_2026_model(self,sentence: str, confidence_threshold: float = 0.70):
+    def __predict_arrera_2026_model(self, sentence: str, confidence_threshold: float = 0.70):
         if not self.__is_loaded:
             return None, 0.0
 
@@ -43,7 +43,7 @@ class ArreraIALoad:
 
         return predicted_tag, float(confidence)
 
-    def predict_gguf_model(self, prompt, max_tokens=512):
+    def __predict_gguf_model(self, prompt, max_tokens=512):
         """
         Génère une réponse. Utilise le format 'chat' compatible OpenAI.
         """
@@ -99,8 +99,8 @@ class ArreraIALoad:
 
     def send_request(self, sentence: str, confidence_threshold: float = 0.70):
         if self.__model_type == LISTMODELSUPPROT[0]:
-            return self.predict_arrera_2026_model(sentence, confidence_threshold)
+            return self.__predict_arrera_2026_model(sentence, confidence_threshold)
         elif self.__model_type == LISTMODELSUPPROT[1]:
-            return self.predict_gguf_model(sentence)
+            return self.__predict_gguf_model(sentence)
         else:
             return None, 0.0
