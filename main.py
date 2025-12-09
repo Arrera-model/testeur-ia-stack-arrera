@@ -1,7 +1,7 @@
 import colorama
 from main_use_model import use_model_arrera,use_model_gemma
 from main_model_trainer import model_trainer_bluider,model_trainer
-
+from main_model_download import use_model_download
 
 # Initialisation des couleurs pour le terminal
 colorama.init(autoreset=True)
@@ -12,9 +12,11 @@ def main():
     while var !=0:
         var = input("1. Entrainer et crée un model\n"
                     "2. Entrainer un model deja crée\n"
-                    "3.Utiliser un model Arrera\n"
+                    "3. Utiliser un model Arrera\n"
                     "4. Charger un model local en .gguf\n"
-                    "0.Quitter\n#")
+                    "5. Teste de model downloader\n"
+                    "0. Quitter\n"
+                    "# ")
         try :
             var = int(var)
         except :
@@ -41,6 +43,8 @@ def main():
             case 4:
                 model_path = input("Emplacement du model local en .gguf : ")
                 use_model_gemma(model_path)
+            case 5 :
+                use_model_download()
             case 0:
                 var = 0
                 print("Au revoir")
