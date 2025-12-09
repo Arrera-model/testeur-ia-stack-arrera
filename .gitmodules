@@ -1,9 +1,9 @@
 [submodule "data_loader"]
 	path = data_loader
-	url = https://github.com/Arrera-model/data_loader.git
+	url = git@github.com:Arrera-model/data_loader.git
 [submodule "loader"]
 	path = loader
-	url = https://github.com/Arrera-model/loader.git
+	url = git@github.com:Arrera-model/loader.git
 [submodule "model_builder_trainer"]
 	path = model_builder_trainer
-	url = https://github.com/Arrera-model/model_builder_trainer.git
+	url = git@github.com:Arrera-model/model_builder_trainer.git
