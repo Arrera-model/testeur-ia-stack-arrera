@@ -5,6 +5,7 @@ def use_model_download():
     print("Teste de model downloader")
     v = input("1. Voir les modele disposnible\n"
               "2. Voir le detail d'un modele\n"
+              "3. Voir les model telecharger"
               "# ")
 
     try :
@@ -29,6 +30,10 @@ def use_model_download():
             else :
                 print("Modele non disponible")
             print("___________________")
+        case 3 :
+            print("Modele telecharger : ")
+            for v in downloader.get_model_download():
+                print(f"- {v}")
 
         case _ :
             print("Valeur invalide")
