@@ -1,5 +1,5 @@
-from objet.ModelTrainer import ModelTrainer
-from objet.DataLoader import DataLoader
+from model_builder_trainer.ModelTrainer import ModelTrainer
+from data_loader.DataLoader import DataLoader
 
 def model_trainer_bluider(dataset_file:str,classe_file_path:str,model_file_path:str):
     loader = DataLoader(dataset_file)

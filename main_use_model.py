@@ -1,4 +1,4 @@
-from objet.ArreraIALoad import ArreraIALoad
+from loader.ArreraIALoad import ArreraIALoad
 from colorama import Fore, Style
 
 def use_model_arrera(MODEL_PATH:str,CLASSES_PATH:str):
