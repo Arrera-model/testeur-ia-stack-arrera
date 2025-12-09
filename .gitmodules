@@ -7,6 +7,6 @@
 [submodule "model_builder_trainer"]
 	path = model_builder_trainer
 	url = git@github.com:Arrera-model/model_builder_trainer.git
-[submodule "model-downloader"]
-	path = model-downloader
+[submodule "model_downloader"]
+	path = model_downloader
 	url = git@github.com:Arrera-model/model-downloader.git
