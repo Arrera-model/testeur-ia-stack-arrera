@@ -4,15 +4,7 @@
 
 Objet qui sera chargé des données d’entraînement pour le modèle
 
-### Paramètre d’entrée du constructeur
 
-Prend en paramètre json_file qui correspond à l’emplacement du fichier JSON de données
-
-### Méthodes
-
-**load_data** : Charge le fichier JSON et retourne les listes nécessaires pour l’entraînement. (sentences : list, labels : numpy.array, classes : list)
-**save_classe_file** : Sauvegarde les noms des classes dans un fichier JSON (obligatoirement)
-**encoding_label** : Ce changement de l’encodage des labels (String → Int)
 
 
 ## ModelTrainer
